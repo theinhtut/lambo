@@ -1,0 +1,4 @@
+{
+  "id": {"N": "1"},
+  "msg": {"S": "Invoking lambda func locally on docker"}
+}

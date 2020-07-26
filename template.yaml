@@ -6,7 +6,7 @@ Description: >
 
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 5 # Please use 3-5 seconds for prod. 10s will cost more if there is any error.
 
 Resources:
   GetFeedbackMsgDataFunction:
@@ -18,12 +18,12 @@ Resources:
       Description: GET all items from DynamoDB
       Policies:
         - DynamoDBReadPolicy:
-            TableName: !Ref FeedbackTable
+            TableName: !Ref FeedbackMsgTable
       Environment:
         Variables:
-          DDB_TABLE_NAME: !Ref FeedbackTable
+          DDB_TABLE_NAME: !Ref FeedbackMsgTable
 
-  FeedbackTable:
+  FeedbackMsgTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:
