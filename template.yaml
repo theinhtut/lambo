@@ -35,12 +35,17 @@ Resources:
       Environment:
         Variables:
           DDB_TABLE_NAME: !Ref FeedbackMsgTable
-      # Events:
-      #   PostFeedbackMsg:
-      #     Type: Api
-      #     Properties:
-      #       Path: /feedback
-      #       Method: post
+      Events:
+        PostFeedbackMsg:
+          Type: Api
+          Properties:
+            Path: /feedback
+            Method: post
+            RestApiId:
+              Ref: FeedbackApiGateway
+            RequestModel:
+              Model: FeedbackMsg
+              Required: true
 
   FeedbackMsgTable:
     Type: AWS::Serverless::SimpleTable
