@@ -22,13 +22,32 @@ Resources:
       Environment:
         Variables:
           DDB_TABLE_NAME: !Ref FeedbackMsgTable
+      
+  PostFeedbackMsgDataFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: post-feedback-msg.lambdaHandler
+      Runtime: nodejs12.x
+      Description: Post feedback msg to DynamoDB
+      Policies:
+        - DynamoDBWritePolicy:
+            TableName: !Ref FeedbackMsgTable
+      Environment:
+        Variables:
+          DDB_TABLE_NAME: !Ref FeedbackMsgTable
+      # Events:
+      #   PostFeedbackMsg:
+      #     Type: Api
+      #     Properties:
+      #       Path: /feedback
+      #       Method: post
 
   FeedbackMsgTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:
         Name: id
-        Type: Number
+        Type: String
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
